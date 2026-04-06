@@ -28,8 +28,8 @@ if [ "$(id -u)" -ne 0 ]; then
                                 changed=1
                                 fi
 
-                                if [ "$changed" = "1" ]; then
-                                    chown -R node:node /paperclip
-                                    fi
+    # Always fix volume ownership (Railway volumes mount as root)
+        chown -R node:node /paperclip
 
-                                    exec gosu node "$@"
+        exec gosu node "$@"
+                                    
